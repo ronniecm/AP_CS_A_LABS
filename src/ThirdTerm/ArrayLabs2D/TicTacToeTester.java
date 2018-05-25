@@ -33,6 +33,13 @@ public class TicTacToeTester
             System.exit(0);
          }
          
+         if(game.checkIfBoardIsFull())
+         {
+        	 	System.out.println(game);
+        	 	System.out.println("It's a tie!");
+        	 	System.exit(0);
+         }
+         
 			if (player == 'x')
 			  player = 'o';
 			else
@@ -40,3 +47,166 @@ public class TicTacToeTester
 		} // while
 	}  // main
 } // TicTacToeTester
+
+/* Output
+
+| | | |
+| | | |
+| | | |
+
+|x| | |
+| | | |
+| | | |
+
+|x| |o|
+| | | |
+| | | |
+
+|x| |o|
+|x| | |
+| | | |
+
+|x| |o|
+|x|o| |
+| | | |
+
+|x| |o|
+|x|o| |
+|x| | |
+
+x is the winner.
+__________________
+
+| | | |
+| | | |
+| | | |
+
+|x| | |
+| | | |
+| | | |
+
+|x|o| |
+| | | |
+| | | |
+
+|x|o|x|
+| | | |
+| | | |
+
+|x|o|x|
+| |o| |
+| | | |
+
+|x|o|x|
+| |o|x|
+| | | |
+
+|x|o|x|
+| |o|x|
+| |o| |
+
+o is the winner.
+_______________
+
+| | | |
+| | | |
+| | | |
+
+|x| | |
+| | | |
+| | | |
+
+|x| |o|
+| | | |
+| | | |
+
+|x| |o|
+| |x| |
+| | | |
+
+|x| |o|
+| |x|o|
+| | | |
+
+|x| |o|
+| |x|o|
+| | |x|
+
+x is the winner.
+___________________
+
+| | | |
+| | | |
+| | | |
+
+|x| | |
+| | | |
+| | | |
+
+|x| |o|
+| | | |
+| | | |
+
+|x|x|o|
+| | | |
+| | | |
+
+|x|x|o|
+| |o| |
+| | | |
+
+|x|x|o|
+| |o|x|
+| | | |
+
+|x|x|o|
+| |o|x|
+|o| | |
+
+o is the winner.
+____________________
+
+| | | |
+| | | |
+| | | |
+
+|x| | |
+| | | |
+| | | |
+
+|x|o| |
+| | | |
+| | | |
+
+|x|o|x|
+| | | |
+| | | |
+
+|x|o|x|
+|o| | |
+| | | |
+
+|x|o|x|
+|o| |x|
+| | | |
+
+|x|o|x|
+|o|o|x|
+| | | |
+
+|x|o|x|
+|o|o|x|
+| |x| |
+
+|x|o|x|
+|o|o|x|
+| |x|o|
+
+|x|o|x|
+|o|o|x|
+|x|x|o|
+
+It's a tie!
+*/
+
+

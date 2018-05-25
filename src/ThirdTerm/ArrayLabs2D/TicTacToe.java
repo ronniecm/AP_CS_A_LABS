@@ -1,5 +1,4 @@
 package ThirdTerm.ArrayLabs2D;
-
 /*****************************************************************
 Name: Ronnie Mohapatra
 Period: 8
@@ -8,7 +7,8 @@ What I Learned: a) To traverse all rows, stop your iteration
                    variable at 2DarrrayName.length-1
                 b) To traverse all columns, stop your iteration
                    variable at 2DarrayName[0].length-1
-                c) Use break to exit a loop
+                c) Use break to exit a loop and return to exit a
+                	   method	
 ******************************************************************/
 public class TicTacToe
 {
@@ -34,17 +34,13 @@ public class TicTacToe
    }  // set
          
    public boolean getWinner(char player)
-   {
-      boolean gameWonByARow = false;
-      boolean gameWonByAColumn = false;
-      
+   {      
       //checks all rows for a win
-      for(int r = 0; r<board.length; r++)
+      for(int r = 0; r< board.length; r++)
       {
          if(board[r][0] == player && board[r][1] == player && board[r][2] == player)
          {
-            gameWonByARow = true; 
-            break; //no need to check other rows
+        	 	return true;
          }
       }
       
@@ -53,8 +49,7 @@ public class TicTacToe
       {
          if(board[0][c] == player && board[1][c] == player && board[2][c] == player)
          {
-            gameWonByAColumn = true;
-            break;//no need to check other columns
+     	 	return true;
          }
       }
       
@@ -63,10 +58,24 @@ public class TicTacToe
          return true; 
          
       //checks minor diagonal
-      if(board[2][0] == player && board[1][1] == player && board[2][0] == player)
+      if(board[0][2] == player && board[1][1] == player && board[2][0] == player)
          return true;
-         
-      return gameWonByARow || gameWonByAColumn;
+      
+      return false;
+   }
+   
+   public boolean checkIfBoardIsFull()
+   {
+	   for (int r = 0; r < board.length; r++)
+	   {
+		   for (int c = 0; c < board[0].length; c++)
+		   {
+			   if (board[r][c] == ' ')
+				   return false;
+		   }
+	   }
+	   
+	   return true;
    }
    
    public String toString()
@@ -85,123 +94,3 @@ public class TicTacToe
       return r;
    } // toString
 } //TicTacToe
-
-/* Output
-
-  ----jGRASP exec: java TicTacToeTester
- | | | |
- | | | |
- | | | |
- 
- |x| | |
- | | | |
- | | | |
- 
- |x|o| |
- | | | |
- | | | |
- 
- |x|o| |
- |x| | |
- | | | |
- 
- |x|o| |
- |x| | |
- | | |o|
- 
- |x|o| |
- |x| | |
- |x| |o|
- 
- x is the winner.
- 
-  ----jGRASP: operation complete.
- 
-  ----jGRASP exec: java TicTacToeTester
- | | | |
- | | | |
- | | | |
- 
- |x| | |
- | | | |
- | | | |
- 
- |x| | |
- | |o| |
- | | | |
- 
- |x|x| |
- | |o| |
- | | | |
- 
- |x|x| |
- | |o| |
- | | |o|
- 
- |x|x|x|
- | |o| |
- | | |o|
- 
- x is the winner.
- 
-  ----jGRASP: operation complete.
- 
-  ----jGRASP exec: java TicTacToeTester
- | | | |
- | | | |
- | | | |
- 
- |x| | |
- | | | |
- | | | |
- 
- |x| | |
- |o| | |
- | | | |
- 
- |x| | |
- |o|x| |
- | | | |
- 
- |x| | |
- |o|x| |
- |o| | |
- 
- |x| | |
- |o|x| |
- |o| |x|
- 
- x is the winner.
- 
-  ----jGRASP: operation complete.
-  
-  ----jGRASP exec: java TicTacToeTester
- | | | |
- | | | |
- | | | |
- 
- | | | |
- | | | |
- |x| | |
- 
- |o| | |
- | | | |
- |x| | |
- 
- |o| |x|
- | | | |
- |x| | |
- 
- |o| |x|
- |o| | |
- |x| | |
- 
- |o| |x|
- |o|x| |
- |x| | |
- 
- x is the winner.
- 
-  ----jGRASP: operation complete.
-  
-  */

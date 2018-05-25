@@ -98,9 +98,21 @@ public class Encryptor2D {
 		return output;
 	}
 	
-	public String encrypt()
+	public String encrypt(String wordToEncrypt)
 	{
-		return "hi";
+		String output = "";
+		
+		for(int i = 0; i < wordToEncrypt.length(); i++)
+		{
+			for(int j = initCharSet.length - 10; j < initCharSet.length; j++)
+			{
+				if(wordToEncrypt.charAt(i) == initCharSet[j])
+				{
+					output += encryptWord(wordToEncrypt.substring(0,i)) + initCharSet[j];
+				}
+			}
+		}
+		return output;
 	}
 	
 	public String toString()
@@ -124,7 +136,7 @@ public class Encryptor2D {
 	{
 		Encryptor2D grid = new Encryptor2D();
 		System.out.println(grid);
-		System.out.println(grid.encryptWord("RON"));
+		System.out.println("R0NN1E --> " + grid.encrypt("R0NN1E"));
 	}
 	
 }
