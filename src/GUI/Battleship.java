@@ -95,22 +95,11 @@ public class Battleship extends JPanel
            // The following two statements are for debugging purpose
          System.out.println (myRow);
          System.out.println (myCol);
-         
-         if(torpedoes == 0)
-         {
-        	 	label.setText("You have run out of torpedoes. Click reset to play another game!");
-        	 	return;
-         } else if(hits == 4) {
-        	 	label.setText("You have already won. Click reset!");
-        	 	return;
-         } else if(matrix[myRow][myCol] == 2 || matrix[myRow][myCol] == 3) {
-        	 	label.setText("Already been fired at. Try another spot.");
-        	 	return;
-         }
-        	 	 	 
+                 	 	 	 
          if(matrix[myRow][myCol] == 0)
          {
         	 	matrix[myRow][myCol] = 2;
+        	 	board[myRow][myCol].setEnabled(false);
         	 	board[myRow][myCol].setText("Miss");
         	 	board[myRow][myCol].setBorderPainted(false);
         	 	board[myRow][myCol].setBackground(Color.green);
@@ -118,24 +107,48 @@ public class Battleship extends JPanel
             label.setText("You have " + torpedoes + " torpedoes");
          }	else if(matrix[myRow][myCol] == 1)	{
         	 	matrix[myRow][myCol] = 3;
+        	 	board[myRow][myCol].setEnabled(false);
         	 	board[myRow][myCol].setText("Hit");
         	 	board[myRow][myCol].setBorderPainted(false);
         	 	board[myRow][myCol].setBackground(Color.red);
         	 	torpedoes--;
             label.setText("You have " + torpedoes + " torpedoes");
         	 	hits++;
-        	 	if(hits == 4)
-        	 		label.setText("You won!");
+        	 	if(hits == 4) {
+        	 		for(int r = 0; r < board.length; r++)
+            	 	{
+            	 		for(int c = 0; c < board[0].length; c++)
+            	 			board[r][c].setEnabled(false);
+            	 	}
+            	 	label.setText("You won. Click reset to play another game!");
+        	 	}
          }
          else
         	 	matrix[myRow][myCol] = matrix[myRow][myCol];  
+         
+         if(torpedoes <= 0 && hits != 4)
+         {
+        	 	label.setText("You have run out of torpedoes. Click reset to play another game!");
+        	 	for(int r = 0; r < board.length; r++)
+        	 	{
+        	 		for(int c = 0; c < board[0].length; c++)
+        	 		{
+        	 			board[r][c].setEnabled(false);
+        	 			if(matrix[r][c] == 1) {
+        	 				board[r][c].setText("You Lose");
+        	 				board[r][c].setBorderPainted(false);
+        	 				board[r][c].setBackground(Color.red);
+        	 			}
+        	 		}
+        	 	}
+         }
       }   // actionPerformed of Handler
    }
    
        // Handling the Reset button
     private class Handler2 implements ActionListener
    {
-       public void actionPerformed(ActionEvent e)
+      public void actionPerformed(ActionEvent e)
       {
     	   		torpedoes = 20;
     	   		hits = 0;
@@ -147,6 +160,7 @@ public class Battleship extends JPanel
     	   				board[r][c].setBorderPainted(true);
     	   				board[r][c].setBackground(Color.BLUE);
     	   				board[r][c].setText("");
+    	   				board[r][c].setEnabled(true);
     	   				label.setText("You have 20 torpedoes.");
     	   			}
     	   		}
@@ -158,10 +172,19 @@ public class Battleship extends JPanel
 	
    public static void main(String[] args)
    {
+	   /*
+	  if(true) {
+		  try {
+			  UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+		  } catch(Exception e){
+			  e.printStackTrace();
+		  }
+	  } */
       JFrame frame = new JFrame("Battleship!");
       frame.setSize(1280, 730);
       frame.setLocation(0, 0);
       frame.setContentPane(new Battleship());
       frame.setVisible(true);
+ 
    }
 }
