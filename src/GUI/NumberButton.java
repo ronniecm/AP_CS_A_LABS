@@ -12,7 +12,8 @@ public class NumberButton extends JButton {
 		val = value;
 		setText("" + value);
 		setOpaque(true);
-		setBackground(Color.orange);
+		setBackground(Color.red);
+		setForeground(Color.white);
 	}
 	
 	public NumberButton(String function)

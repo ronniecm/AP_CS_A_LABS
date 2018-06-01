@@ -5,6 +5,7 @@ import java.awt.*;
 
 public class OpButton extends JButton {
 	private String op;
+	private boolean pushed = false;
 	
 	public OpButton(String operation)
 	{
@@ -16,4 +17,23 @@ public class OpButton extends JButton {
 	{
 		return op;
 	}
+	
+	public boolean getStatus()
+	{
+		return pushed;
+	}
+	
+	public void setStatus(boolean status)
+	{
+		pushed = status;
+		if(pushed) {
+			setBackground(Color.blue);
+			setForeground(Color.WHITE);
+		} else {
+			setBackground(null);
+			setForeground(Color.black);
+		}
+	}
+	
 }
+

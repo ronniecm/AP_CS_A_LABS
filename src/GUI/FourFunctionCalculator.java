@@ -21,6 +21,9 @@ public class FourFunctionCalculator extends JPanel {
 	private JButton clear;
 	private int pushes = 0;
 	private boolean pushed = false;
+	private boolean equalsPushed = false;
+	private JButton negative;
+	private boolean negativeNum;
 	
 	public FourFunctionCalculator()
 	{
@@ -28,7 +31,7 @@ public class FourFunctionCalculator extends JPanel {
 		setLayout(new BorderLayout());
 		
 		buttons = new JPanel();
-		buttons.setLayout(new GridLayout(3, 3));
+		buttons.setLayout(new GridLayout(4, 3));
 		add(buttons, BorderLayout.CENTER);
 		
 		numButtons = new NumberButton[3][3];
@@ -45,6 +48,17 @@ public class FourFunctionCalculator extends JPanel {
 			}
 		}
 		
+		decimal = new JButton(".");
+		decimal.addActionListener(new NumListener(101, 101));
+		zero = new NumberButton(0);
+		zero.addActionListener(new NumListener(100, 100));
+		negative = new JButton("(-)");
+		negative.addActionListener(new Negative());
+		buttons.add(decimal);
+		buttons.add(zero);
+		buttons.add(negative);
+		
+		
 		
 		calcText = new JTextField("0", 10);
 		calcText.setFont(new Font("Times New Roman", Font.PLAIN, 36));
@@ -55,10 +69,6 @@ public class FourFunctionCalculator extends JPanel {
 		opButtons.setLayout(new FlowLayout());
 		add(opButtons, BorderLayout.SOUTH);
 		
-		decimal = new JButton(".");
-		decimal.addActionListener(new NumListener(101, 101));
-		zero = new NumberButton(0);
-		zero.addActionListener(new NumListener(100, 100));
 		add = new OpButton("+");
 		add.addActionListener(new Operation());
 		subtract = new OpButton("-");
@@ -71,10 +81,8 @@ public class FourFunctionCalculator extends JPanel {
 		clear.addActionListener(new Clear());
 		
 		
-		opButtons.add(decimal);
 		opButtons.add(add);
 		opButtons.add(subtract);
-		opButtons.add(zero);
 		opButtons.add(multiply);
 		opButtons.add(divide);
 		opButtons.add(clear);
@@ -83,6 +91,7 @@ public class FourFunctionCalculator extends JPanel {
 		equals = new JButton("=");
 		equals.addActionListener(new Equals());
 		add(equals, BorderLayout.EAST);
+		
 	}
 	
 	private class NumListener implements ActionListener
@@ -97,8 +106,22 @@ public class FourFunctionCalculator extends JPanel {
 		public void actionPerformed(ActionEvent e)
 		{
 			calcText.setEnabled(true);
-			if(pushed || calcText.getText().equals("0"))
+			if(negativeNum) {
+				calcText.setText("-");
+				negativeNum = false;
+			}
+			
+			if(pushed || calcText.getText().equals("0") || equalsPushed)
 			{
+				if(equalsPushed)
+				{
+					nums[0] = 0;
+					nums[1] = 0;
+					op = "";
+					pushes = 0;
+					equalsPushed = false;
+				}
+				
 				calcText.setText("");
 				pushed = false;
 				if(row == 100 && col == 100)
@@ -163,6 +186,17 @@ public class FourFunctionCalculator extends JPanel {
 			nums[1] = Double.parseDouble(calcText.getText());
 			
 			calculate();
+			
+			equalsPushed = true;
+		}
+	}
+	
+	private class Negative implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			negativeNum = true;
+			calcText.setText("-" + calcText.getText());
 		}
 	}
 	
@@ -174,8 +208,8 @@ public class FourFunctionCalculator extends JPanel {
 			nums[0] = 0;
 			nums[1] = 0;
 			op = "";
-			calcText.setText("0");
 			pushes = 0;
+			calcText.setText("0");
 		}
 	}
 	
@@ -194,6 +228,14 @@ public class FourFunctionCalculator extends JPanel {
 		
 		calcText.setText("" + answer);
 		System.out.println(calcText.getText());
+	}
+	
+	public void clear()
+	{
+		nums[0] = 0;
+		nums[1] = 0;
+		op = "";
+		pushes = 0;
 	}
 	
 	public static void main(String[] args)
