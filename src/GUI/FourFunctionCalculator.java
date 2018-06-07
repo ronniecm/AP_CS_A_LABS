@@ -66,8 +66,8 @@ public class FourFunctionCalculator extends JPanel {
 		add(calcText, BorderLayout.NORTH);
 		
 		opButtons = new JPanel();
-		opButtons.setLayout(new FlowLayout());
-		add(opButtons, BorderLayout.SOUTH);
+		opButtons.setLayout(new GridLayout(5, 1));
+		add(opButtons, BorderLayout.WEST);
 		
 		add = new OpButton("+");
 		add.addActionListener(new Operation());
@@ -81,11 +81,11 @@ public class FourFunctionCalculator extends JPanel {
 		clear.addActionListener(new Clear());
 		
 		
+		opButtons.add(clear);
 		opButtons.add(add);
 		opButtons.add(subtract);
 		opButtons.add(multiply);
 		opButtons.add(divide);
-		opButtons.add(clear);
 
 		
 		equals = new JButton("=");
@@ -188,6 +188,8 @@ public class FourFunctionCalculator extends JPanel {
 			calculate();
 			
 			equalsPushed = true;
+			
+			negativeNum = false;
 		}
 	}
 	
@@ -210,6 +212,7 @@ public class FourFunctionCalculator extends JPanel {
 			op = "";
 			pushes = 0;
 			calcText.setText("0");
+			negativeNum = false;		
 		}
 	}
 	

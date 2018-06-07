@@ -6,7 +6,7 @@ public class Odometer extends JPanel {
 	private JLabel hundreds;
 	private JLabel tens;
 	private JLabel ones;
-	private int steps = 0;
+	private int steps = 997;
 	
 	public Odometer()
 	{
@@ -33,9 +33,17 @@ public class Odometer extends JPanel {
 	public void update()
 	{
 		steps++;
+		if(steps == 1000)
+			steps = 0;
+		
 		hundreds.setText("" + steps / 100);
 		tens.setText("" + steps % 100 / 10);
 		ones.setText("" + steps % 10);
+	}
+	
+	public int getSteps()
+	{
+		return steps;
 	}
 	
 }

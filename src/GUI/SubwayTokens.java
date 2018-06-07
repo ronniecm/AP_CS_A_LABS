@@ -53,7 +53,7 @@ public class SubwayTokens extends JPanel {
 	
 	private class Listener implements ActionListener
 	{
-		DecimalFormat d = new DecimalFormat("0.00");
+		DecimalFormat d = new DecimalFormat("$0.00");
 		public void actionPerformed(ActionEvent e)
 		{
 			if(e.getSource() == plusOne)
@@ -69,7 +69,10 @@ public class SubwayTokens extends JPanel {
 			else if(e.getSource() == minusOneCent)
 				amount -= 0.01;
 			
-			label.setText("$" + d.format(amount));
+			if(amount < 0)
+				amount = 0;
+			
+			label.setText(d.format(amount));
 		}
 	}
 	

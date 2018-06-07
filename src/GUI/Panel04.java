@@ -29,7 +29,7 @@ public class Panel04 extends JPanel{
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			odo.update();
+				odo.update();
 		}
 	}
 	
