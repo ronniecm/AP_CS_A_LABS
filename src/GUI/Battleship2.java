@@ -181,8 +181,8 @@ public class Battleship2 extends JPanel {
 		}
 		
 		JFrame frame = new JFrame("Battleship 2.0");
-		frame.setLocation(0, 730/2 + 1);
-		frame.setSize(1280, 730/2 + 1);
+		frame.setLocation(0, 0);
+		frame.setSize(1280/2, 730);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setContentPane(new Battleship2());
 		frame.setVisible(true);
@@ -190,8 +190,8 @@ public class Battleship2 extends JPanel {
 		
 			
 		JFrame frame2 = new JFrame("Battleship 2.0");
-		frame2.setLocation(0, 0);
-		frame2.setSize(1280, 730/2 + 1);
+		frame2.setLocation(1280/2, 0);
+		frame2.setSize(1280/2, 730);
 		frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame2.setContentPane(new BattleshipMulti());
 		frame2.setVisible(true);
